@@ -6,18 +6,19 @@ import { Route } from "react-router-dom";
 import Medicine from "./Container/Medicine";
 import Doctor from "./Container/Doctor";
 import User from "./Container/User";
+import Layout from "./Component/Layout/Layout";
 
 
 function App() {
   return (
    <>
-   <MiniDrawer>
+   <Layout>
      <Switch>
        <Route path={'/Medicine'} exact component={Medicine}/>
        <Route path={'/Doctor'} exact component={Doctor} />
        <Route path={'/User'} exact component={User} />
      </Switch>
-   </MiniDrawer>
+   </Layout>
    </>
 
   
