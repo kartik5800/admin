@@ -20,11 +20,11 @@ function Medicine(props) {
     const [expiry, setexpiry] = useState('');
     const [Data, setData] = useState([]);
 
-    const    columns = [
+    const columns = [
         { field: 'id', headerName: 'ID', width: 90 },
         {
-            field: 'Name',
-            headerName: 'name',
+            field: 'name',
+            headerName: 'Name',
             width: 150,
             editable: false,
         },
@@ -66,13 +66,6 @@ function Medicine(props) {
         },
         [])
 
-
-        const rows = [
-            { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-        ]
-
-
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -86,7 +79,7 @@ function Medicine(props) {
         let localData = JSON.parse(localStorage.getItem("medicine"));
 
         let Data = {
-            id: Math.floor(Math.random() * 1000 ),
+            id: Math.floor(Math.random() * 1000),
             name,
             price,
             quntity,
@@ -117,18 +110,18 @@ function Medicine(props) {
                         </Button>
                         {
                             Data !== null ?
-                        <div style={{ height: 400, width: '100%' }}>
-                            <DataGrid
-                                rows={rows}
-                                columns={columns}
-                                pageSize={5}
-                                rowsPerPageOptions={[5]}
-                                checkboxSelection
-                                disableSelectionOnClick
-                            />
-                        </div>
-                        : <p>empty table</p>
-}
+                                <div style={{ height: 400, width: '100%' }}>
+                                    <DataGrid
+                                        rows={Data}
+                                        columns={columns}
+                                        pageSize={5}
+                                        rowsPerPageOptions={[5]}
+                                        checkboxSelection
+                                        disableSelectionOnClick
+                                    />
+                                </div>
+                                : <p>empty table</p>
+                        }
                         <Dialog open={open} onClose={handleClose}>
                             <DialogTitle>Add medicine</DialogTitle>
                             <DialogContent>
@@ -136,6 +129,7 @@ function Medicine(props) {
                                 <TextField
                                     autoFocus
                                     margin="dense"
+                                    name='name'
                                     id="name"
                                     label="medicine name"
                                     fullWidth

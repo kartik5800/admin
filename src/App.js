@@ -11,17 +11,17 @@ import Layout from "./Component/Layout/Layout";
 
 function App() {
   return (
-   <>
-   <Layout>
-     <Switch>
-       <Route path={'/Medicine'} exact component={Medicine}/>
-       <Route path={'/Doctor'} exact component={Doctor} />
-       <Route path={'/User'} exact component={User} />
-     </Switch>
-   </Layout>
-   </>
+    <>
+      <Layout>
+        <Switch>
+          <Route path={'/Medicine'} exact component={Medicine} />
+          <Route path={'/Doctor'} exact component={Doctor} />
+          <Route path={'/User'} exact component={User} />
+        </Switch>
+      </Layout>
+    </>
 
-  
+
   );
 }
 
