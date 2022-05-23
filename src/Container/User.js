@@ -15,7 +15,7 @@ import { DataGrid } from '@mui/x-data-grid';
 
 
 
-export default function Medicine() {
+export default function User() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
 
@@ -28,7 +28,7 @@ export default function Medicine() {
   };
 
 
-  let medicine = {
+  let User = {
     name: yup.string().required('enter name'),
     price: yup.string().required('please enter price'),
     quantity: yup.string().required('please enter quantity'),
@@ -36,7 +36,7 @@ export default function Medicine() {
   }
 
 
-  let schema = yup.object().shape(medicine);
+  let schema = yup.object().shape(User);
 
   const formik = useFormik({
     initialValues: {
@@ -53,7 +53,7 @@ export default function Medicine() {
   })
 
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("medicine"))
+    let localdata = JSON.parse(localStorage.getItem("User"))
 
     let data = {
       id: Math.floor(Math.random() * 1000),
@@ -61,10 +61,10 @@ export default function Medicine() {
     }
 
     if (localdata === null) {   
-      localStorage.setItem("medicine", JSON.stringify([data]))
+      localStorage.setItem("User", JSON.stringify([data]))
     } else {
       localdata.push(data)
-      localStorage.setItem("medicine", JSON.stringify(localdata))
+      localStorage.setItem("User", JSON.stringify(localdata))
     }
 
     setOpen(false);
@@ -82,7 +82,7 @@ export default function Medicine() {
   ];
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("medicine"))
+    let localData = JSON.parse(localStorage.getItem("User"))
 
     if (localData !== null) {
       setData(localData)

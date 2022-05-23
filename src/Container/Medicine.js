@@ -9,7 +9,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { DataGrid } from '@mui/x-data-grid';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 function Medicine(props) {
@@ -38,7 +39,7 @@ function Medicine(props) {
             field: 'quntity',
             headerName: 'quntity',
             type: 'number',
-            width: 110,
+            width: 150,
             editable: false,
         },
         {
@@ -47,7 +48,34 @@ function Medicine(props) {
             sortable: false,
             width: 160,
         },
+
+
+        {
+            field: 'action',
+            headerName: 'action',
+            sortable: false,
+            width: 500,
+            renderCell: (params) => (
+                <>
+                <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
+                    Delete
+                </Button>
+                <Button variant="contained" endIcon={<EditIcon />}>
+                Update
+              </Button>
+              </>
+            )
+        },
     ];
+
+
+    const handleDelete = (id) =>{
+        let localData = JSON.parse(localStorage.getItem('medicine'));
+        let filterData = localData.filter((v,i) => v.id !== id);
+        localStorage.setItem("medicine",JSON.stringify(filterData))
+        loadData()
+
+    }
 
     const loadData = () => {
         let localData = JSON.parse(localStorage.getItem("medicine"))
