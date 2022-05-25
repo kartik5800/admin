@@ -60,7 +60,7 @@ function Medicine(props) {
                 <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
                     Delete
                 </Button>
-                <Button variant="contained" endIcon={<EditIcon />}>
+                <Button variant="contained" onClick={() => handleUpdate(params.row.id) } endIcon={<EditIcon />}>
                 Update
               </Button>
               </>
@@ -76,6 +76,13 @@ function Medicine(props) {
         loadData()
 
     }
+
+    const handleUpdate = (id) =>{
+        let localData = JSON.parse(localStorage.getItem('medicine'));
+    //    console.log(localdata);
+
+    }
+
 
     const loadData = () => {
         let localData = JSON.parse(localStorage.getItem("medicine"))

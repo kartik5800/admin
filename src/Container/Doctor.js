@@ -13,12 +13,15 @@ import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 
 export default function Doctor() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
+  const [Update, setUpdate] = useState()
 
   const handleDelete = (id) =>{
     let localData = JSON.parse(localStorage.getItem('Doctor'));
@@ -54,10 +57,35 @@ export default function Doctor() {
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
+      if (Update) {
+        handleUpdateData(value)
+      }else{
       handleSubmitdata(value)
+      }
       resetForm();
     }
-  })
+  });
+
+  const handleUpdateData = (value) => {
+    let localData = JSON.parse(localStorage.getItem("Doctor"));
+    let uData = localData.map((l ,i) => {
+      if (l.id === value.id) {
+        return value
+      }else {
+        return l;
+      }
+    })
+
+    localStorage.setItem("Doctor",JSON.stringify(uData));
+
+    setOpen(false);
+    setUpdate();
+    loadData();
+    console.log(uData);
+
+  }
+
+
 
   const handleSubmitdata = (value) => {
     let localdata = JSON.parse(localStorage.getItem("Doctor"))
@@ -84,11 +112,16 @@ export default function Doctor() {
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'designation', headerName: ' designation', width: 130 },
     { field: 'salary', headerName: 'salary', width: 130 },
-    { field: 'action', headerName: 'acton', width: 130 ,
+    { field: 'action', headerName: 'acton', width: 260 ,
     renderCell: (params) => (
+      <>
         <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
             Delete
         </Button>
+         <Button variant="contained" onClick={() => handleEdit(params.row) } endIcon={<EditIcon />}>
+         Update
+       </Button>
+       </>
     )},
   ];
 
@@ -105,6 +138,13 @@ export default function Doctor() {
       loadData()
     },
   [])
+
+  const handleEdit = (data) => {
+    setOpen(true);
+    setUpdate(data);
+    formik.setValues(data)
+    
+  }
 
   return (
 
@@ -169,7 +209,15 @@ export default function Doctor() {
                   
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Submit</Button>
+                    {
+                      Update ?
+                      <Button type="submit">Update</Button>
+                      :
+                      <Button type="submit">Submit</Button>
+
+                    }
+                    
+
                   </DialogActions>
                 </DialogContent>
               </Form>
