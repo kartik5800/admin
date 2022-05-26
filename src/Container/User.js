@@ -12,12 +12,24 @@ import DialogTitle from '@mui/material/DialogTitle';
 import * as yup from 'yup';
 import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 
 export default function User() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
+  const [Update, setUpdate] = useState()
+
+  const handleDelete = (id) =>{
+    let localData = JSON.parse(localStorage.getItem('User'));
+    let filterData = localData.filter((d,i) => d.id !== id);
+    localStorage.setItem("User",JSON.stringify(filterData))
+    loadData()
+
+}
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,11 +40,10 @@ export default function User() {
   };
 
 
-  let User = {
+  let Doctor = {
     name: yup.string().required('enter name'),
-    price: yup.string().required('please enter price'),
-    quantity: yup.string().required('please enter quantity'),
-    expiry: yup.string().required('please enter expiry'),
+    designation: yup.string().required('please enter designation'),
+    salary: yup.string().required('please enter salary'),
   }
 
 
@@ -41,16 +52,40 @@ export default function User() {
   const formik = useFormik({
     initialValues: {
       name: '',
-      price: '',
-      quantity: '',
-      expiry: ''
+      designation: '',
+      salary: '',
     },
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
+      if (Update) {
+        handleUpdateData(value)
+      }else{
       handleSubmitdata(value)
+      }
       resetForm();
     }
-  })
+  });
+
+  const handleUpdateData = (value) => {
+    let localData = JSON.parse(localStorage.getItem("User"));
+    let uData = localData.map((l ,i) => {
+      if (l.id === value.id) {
+        return value
+      }else {
+        return l;
+      }
+    })
+
+    localStorage.setItem("Doctor",JSON.stringify(uData));
+
+    setOpen(false);
+    setUpdate();
+    loadData();
+    console.log(uData);
+
+  }
+
+
 
   const handleSubmitdata = (value) => {
     let localdata = JSON.parse(localStorage.getItem("User"))
@@ -72,13 +107,22 @@ export default function User() {
 
   }
 
-  const columns = [
+  const columns1 = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Name', width: 130 },
-    { field: 'price', headerName: ' Price', width: 130 },
-    { field: 'quantity', headerName: 'Quantity', width: 130 },
-    { field: 'expiry', headerName: 'Expiry', width: 130 },
-    { field: 'delete', headerName: 'Delete', width: 130 },
+    { field: 'designation', headerName: ' designation', width: 130 },
+    { field: 'salary', headerName: 'salary', width: 130 },
+    { field: 'action', headerName: 'acton', width: 260 ,
+    renderCell: (params) => (
+      <>
+        <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
+            Delete
+        </Button>
+         <Button variant="contained" onClick={() => handleEdit(params.row) } endIcon={<EditIcon />}>
+         Update
+       </Button>
+       </>
+    )},
   ];
 
   const loadData = () => {
@@ -95,6 +139,13 @@ export default function User() {
     },
   [])
 
+  const handleEdit = (data) => {
+    setOpen(true);
+    setUpdate(data);
+    formik.setValues(data)
+    
+  }
+
   return (
 
   
@@ -102,19 +153,19 @@ export default function User() {
       <Container>
         <div>
           <Button variant="outlined" onClick={handleClickOpen}>
-            Add Medicine
+            Add User
           </Button>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
               rows={data}
-              columns={columns}
+              columns={columns1}
               pageSize={5}
               rowsPerPageOptions={[5]}
               checkboxSelection
             />
           </div>
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Medicine</DialogTitle>
+            <DialogTitle>Add User</DialogTitle>
             <Formik value={formik}>
               <Form onSubmit={formik.handleSubmit}>
                 <DialogContent>
@@ -133,42 +184,40 @@ export default function User() {
                   />
                   <TextField
                     margin="dense"
-                    id="price"
-                    label="price"
-                    type="price"
+                    id="designation"
+                    label="designation"
+                    type="designation"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
-                    defaultValue={formik.values.price}
-                    helperText={formik.errors.price}
-                    error={formik.errors.price ? true : false}
+                    defaultValue={formik.values.designation}
+                    helperText={formik.errors.designation}
+                    error={formik.errors.designation ? true : false}
                   />
                   <TextField
                     margin="dense"
-                    id="quantity"
-                    label="quantity"
+                    id="salary"
+                    label="salary"
                     fullWidth
                     variant="standard"
                     onChange={formik.handleChange}
-                    defaultValue={formik.values.quantity}
-                    helperText={formik.errors.quantity}
-                    error={formik.errors.quantity ? true : false}
+                    defaultValue={formik.values.salary}
+                    helperText={formik.errors.salary}
+                    error={formik.errors.salary ? true : false}
 
                   />
-                  <TextField
-                    margin="dense"
-                    id="expiry"
-                    label="expiry"
-                    fullWidth
-                    variant="standard"
-                    onChange={formik.handleChange}
-                    defaultValue={formik.values.expiry}
-                    helperText={formik.errors.expiry}
-                    error={formik.errors.expiry ? true : false}
-                  />
+                  
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type="submit">Submit</Button>
+                    {
+                      Update ?
+                      <Button type="submit">Update</Button>
+                      :
+                      <Button type="submit">Submit</Button>
+
+                    }
+                    
+
                   </DialogActions>
                 </DialogContent>
               </Form>
