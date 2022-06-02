@@ -76,7 +76,7 @@ export default function User() {
       }
     })
 
-    localStorage.setItem("Doctor",JSON.stringify(uData));
+    localStorage.setItem("User",JSON.stringify(uData));
 
     setOpen(false);
     setUpdate();
