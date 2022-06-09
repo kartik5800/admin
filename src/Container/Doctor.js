@@ -23,23 +23,24 @@ export default function Doctor() {
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState()
 
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     let localData = JSON.parse(localStorage.getItem('Doctor'));
-    let filterData = localData.filter((d,i) => d.id !== id);
-    localStorage.setItem("Doctor",JSON.stringify(filterData))
+    let filterData = localData.filter((d, i) => d.id !== id);
+    localStorage.setItem("Doctor", JSON.stringify(filterData))
     loadData()
 
-}
-
-  const handleClickOpen = () => {
+  }
+//dialog box open krva mate
+ const handleClickOpen = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  // dialog box close krva mate
+const handleClose = () => {
     setOpen(false);
   };
 
-
+// validation mate 
   let Doctor = {
     name: yup.string().required('enter name'),
     designation: yup.string().required('please enter designation'),
@@ -49,6 +50,7 @@ export default function Doctor() {
 
   let schema = yup.object().shape(Doctor);
 
+  // initial value aapva mate & scema mate
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -59,24 +61,25 @@ export default function Doctor() {
     onSubmit: (value, { resetForm }) => {
       if (Update) {
         handleUpdateData(value)
-      }else{
-      handleSubmitdata(value)
+      } else {
+        handleSubmitdata(value)
       }
       resetForm();
     }
   });
 
+  // data update mate and dialog box close krva and new data set krva mate 
   const handleUpdateData = (value) => {
     let localData = JSON.parse(localStorage.getItem("Doctor"));
-    let uData = localData.map((l ,i) => {
+    let uData = localData.map((l, i) => {
       if (l.id === value.id) {
         return value
-      }else {
+      } else {
         return l;
       }
     })
 
-    localStorage.setItem("Doctor",JSON.stringify(uData));
+    localStorage.setItem("Doctor", JSON.stringify(uData));
 
     setOpen(false);
     setUpdate();
@@ -86,16 +89,18 @@ export default function Doctor() {
   }
 
 
-
+// data submit krva mate
   const handleSubmitdata = (value) => {
     let localdata = JSON.parse(localStorage.getItem("Doctor"))
 
+
+// rendom id lavva mate
     let data = {
       id: Math.floor(Math.random() * 1000),
       ...value
     }
 
-    if (localdata === null) {   
+    if (localdata === null) {
       localStorage.setItem("Doctor", JSON.stringify([data]))
     } else {
       localdata.push(data)
@@ -112,17 +117,19 @@ export default function Doctor() {
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'designation', headerName: ' designation', width: 130 },
     { field: 'salary', headerName: 'salary', width: 130 },
-    { field: 'action', headerName: 'acton', width: 260 ,
-    renderCell: (params) => (
-      <>
-        <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
+    {
+      field: 'action', headerName: 'acton', width: 260,
+      renderCell: (params) => (
+        <>
+          <Button variant="outlined" onClick={() => handleDelete(params.row.id)} startIcon={<DeleteIcon />}>
             Delete
-        </Button>
-         <Button variant="contained" onClick={() => handleEdit(params.row) } endIcon={<EditIcon />}>
-         Update
-       </Button>
-       </>
-    )},
+          </Button>
+          <Button variant="contained" onClick={() => handleEdit(params.row)} endIcon={<EditIcon />}>
+            Update
+          </Button>
+        </>
+      )
+    },
   ];
 
   const loadData = () => {
@@ -137,18 +144,18 @@ export default function Doctor() {
     () => {
       loadData()
     },
-  [])
+    [])
 
   const handleEdit = (data) => {
     setOpen(true);
     setUpdate(data);
     formik.setValues(data)
-    
+
   }
 
   return (
 
-  
+
     <Box>
       <Container>
         <div>
@@ -206,17 +213,17 @@ export default function Doctor() {
                     error={formik.errors.salary ? true : false}
 
                   />
-                  
+
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     {
                       Update ?
-                      <Button type="submit">Update</Button>
-                      :
-                      <Button type="submit">Submit</Button>
+                        <Button type="submit">Update</Button>
+                        :
+                        <Button type="submit">Submit</Button>
 
                     }
-                    
+
 
                   </DialogActions>
                 </DialogContent>

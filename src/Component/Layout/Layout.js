@@ -107,7 +107,8 @@ export default function Layout({children}) {
 const meddata = [
   { Label:'Medicine' ,  icon:<LocalHospitalIcon/> , to:"/Medicine"},
   { Label:'Doctor' , icon:<VaccinesIcon /> , to:"/Doctor"},
-  { Label:'User' , icon:<GroupAddIcon /> , to:"/User"}
+  { Label:'User' , icon:<GroupAddIcon /> , to:"/User"},
+  { Label:'Coustomer' , icon:<GroupAddIcon /> , to:"/Coustomer"}
 
 
 ]

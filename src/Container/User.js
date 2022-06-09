@@ -23,13 +23,13 @@ export default function User() {
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState()
 
-  const handleDelete = (id) =>{
+  const handleDelete = (id) => {
     let localData = JSON.parse(localStorage.getItem('User'));
-    let filterData = localData.filter((d,i) => d.id !== id);
-    localStorage.setItem("User",JSON.stringify(filterData))
+    let filterData = localData.filter((d, i) => d.id !== id);
+    localStorage.setItem("User", JSON.stringify(filterData))
     loadData()
 
-}
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -59,8 +59,8 @@ export default function User() {
     onSubmit: (value, { resetForm }) => {
       if (Update) {
         handleUpdateData(value)
-      }else{
-      handleSubmitdata(value)
+      } else {
+        handleSubmitdata(value)
       }
       resetForm();
     }
@@ -68,15 +68,15 @@ export default function User() {
 
   const handleUpdateData = (value) => {
     let localData = JSON.parse(localStorage.getItem("User"));
-    let uData = localData.map((l ,i) => {
+    let uData = localData.map((l, i) => {
       if (l.id === value.id) {
         return value
-      }else {
+      } else {
         return l;
       }
     })
 
-    localStorage.setItem("User",JSON.stringify(uData));
+    localStorage.setItem("User", JSON.stringify(uData));
 
     setOpen(false);
     setUpdate();
@@ -95,7 +95,7 @@ export default function User() {
       ...value
     }
 
-    if (localdata === null) {   
+    if (localdata === null) {
       localStorage.setItem("User", JSON.stringify([data]))
     } else {
       localdata.push(data)
@@ -112,17 +112,19 @@ export default function User() {
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'designation', headerName: ' designation', width: 130 },
     { field: 'salary', headerName: 'salary', width: 130 },
-    { field: 'action', headerName: 'acton', width: 260 ,
-    renderCell: (params) => (
-      <>
-        <Button variant="outlined" onClick={() => handleDelete(params.row.id) } startIcon={<DeleteIcon />}>
+    {
+      field: 'action', headerName: 'acton', width: 260,
+      renderCell: (params) => (
+        <>
+          <Button variant="outlined" onClick={() => handleDelete(params.row.id)} startIcon={<DeleteIcon />}>
             Delete
-        </Button>
-         <Button variant="contained" onClick={() => handleEdit(params.row) } endIcon={<EditIcon />}>
-         Update
-       </Button>
-       </>
-    )},
+          </Button>
+          <Button variant="contained" onClick={() => handleEdit(params.row)} endIcon={<EditIcon />}>
+            Update
+          </Button>
+        </>
+      )
+    },
   ];
 
   const loadData = () => {
@@ -137,18 +139,18 @@ export default function User() {
     () => {
       loadData()
     },
-  [])
+    [])
 
   const handleEdit = (data) => {
     setOpen(true);
     setUpdate(data);
     formik.setValues(data)
-    
+
   }
 
   return (
 
-  
+
     <Box>
       <Container>
         <div>
@@ -206,17 +208,17 @@ export default function User() {
                     error={formik.errors.salary ? true : false}
 
                   />
-                  
+
                   <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                     {
                       Update ?
-                      <Button type="submit">Update</Button>
-                      :
-                      <Button type="submit">Submit</Button>
+                        <Button type="submit">Update</Button>
+                        :
+                        <Button type="submit">Submit</Button>
 
                     }
-                    
+
 
                   </DialogActions>
                 </DialogContent>

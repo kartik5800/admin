@@ -7,6 +7,7 @@ import Medicine from "./Container/Medicine";
 import Doctor from "./Container/Doctor";
 import User from "./Container/User";
 import Layout from "./Component/Layout/Layout";
+import Coustomer from "./Container/Coustomer/Coustomer";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path={'/Medicine'} exact component={Medicine} />
           <Route path={'/Doctor'} exact component={Doctor} />
           <Route path={'/User'} exact component={User} />
+          <Route path={'/Coustomer'} exact component={Coustomer} />
         </Switch>
       </Layout>
     </>
