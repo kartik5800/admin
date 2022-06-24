@@ -265,7 +265,7 @@ function Coustomer(props) {
               aria-describedby="alert-dialog-description"
             >
               <DialogTitle id="alert-dialog-title">
-                {"Are You Sure Delete Medicine Data ...? "}
+                {"Are You Sure to Delete ??? "}
               </DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">

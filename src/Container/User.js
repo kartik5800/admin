@@ -22,6 +22,7 @@ export default function User() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState()
+const [filterdata , setfilterdata] = useState([]);
 
   const handleDelete = (id) => {
     let localData = JSON.parse(localStorage.getItem('User'));
@@ -41,9 +42,12 @@ export default function User() {
 
 
   let Doctor = {
+
     name: yup.string().required('enter name'),
     designation: yup.string().required('please enter designation'),
     salary: yup.string().required('please enter salary'),
+
+
   }
 
 
@@ -148,18 +152,45 @@ export default function User() {
 
   }
 
+  const handlesearch = (serval) => {
+    let serdata = JSON.parse(localStorage.getItem("User"));
+  
+
+    let fdata = serdata.filter((l) =>(
+      l.id.toString().includes(serval.toString()) ||
+      l.name.toString().toLowerCase().includes(serval.toLowerCase()) ||
+      l.designation.toString().includes(serval) ||
+      l.salary.toString().includes(serval)
+  ))
+
+  setfilterdata(fdata);
+    }
+
+
+
+    const filterfinal = filterdata.length > 0 ? filterdata : data;
+
   return (
 
 
     <Box>
       <Container>
+
+        <TextField
+          margin="dense"
+          id="search"
+          label="search"
+          fullWidth
+          variant="standard"
+          onChange={(e) => handlesearch(e.target.value)}
+        />
         <div>
           <Button variant="outlined" onClick={handleClickOpen}>
             Add User
           </Button>
           <div style={{ height: 400, width: '100%' }}>
             <DataGrid
-              rows={data}
+              rows={filterfinal}
               columns={columns1}
               pageSize={5}
               rowsPerPageOptions={[5]}
@@ -184,6 +215,7 @@ export default function User() {
                     helperText={formik.errors.name}
                     error={formik.errors.name ? true : false}
                   />
+
                   <TextField
                     margin="dense"
                     id="designation"
@@ -218,7 +250,6 @@ export default function User() {
                         <Button type="submit">Submit</Button>
 
                     }
-
 
                   </DialogActions>
                 </DialogContent>
