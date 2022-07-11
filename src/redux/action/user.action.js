@@ -78,3 +78,6 @@ export const erroruser = (e) => (dispatch) => {
   dispatch({ type: ActionTypes.ERROE_USER, payload: e })
 }
 
+
+
+

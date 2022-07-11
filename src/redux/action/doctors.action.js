@@ -23,3 +23,4 @@ export const Doctorsdata = () => (dispatch) => {
             console.log(error);
         }   
 }
+

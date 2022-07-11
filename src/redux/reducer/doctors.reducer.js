@@ -21,3 +21,4 @@ export const doctorsReducer = (state=initalState, action) => {
             return state;
     }
 }
+
