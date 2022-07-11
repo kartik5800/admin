@@ -25,6 +25,7 @@ import { NavLink } from 'react-router-dom';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({

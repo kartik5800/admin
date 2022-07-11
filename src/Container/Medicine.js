@@ -57,6 +57,7 @@ export default function Medicine() {
     }
 
 
+    
     setOpen(false);
     // setName();
     // setPrice();

@@ -17,8 +17,6 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 
-
-
 export default function Doctor() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
