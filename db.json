@@ -1,0 +1,35 @@
+{
+  "User": [
+    {
+      "id": 1,
+      "name": "json-",
+      "designation": "typicode",
+      "salary": "15000"
+    },
+    {
+      "id": 2,
+      "name": "json-server",
+      "designation": "typicode",
+      "salary": "15000"
+    },
+    {
+      "id": 3,
+      "name": "-server",
+      "designation": "typicode",
+      "salary": "15000"
+    },
+    {
+      "id": 4
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
