@@ -16,9 +16,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { Label } from '@mui/icons-material';
+// import InboxIcon from '@mui/icons-material/MoveToInbox';
+// import MailIcon from '@mui/icons-material/Mail';
+// import { Label } from '@mui/icons-material';
 import VaccinesIcon from '@mui/icons-material/Vaccines';
 import { NavLink } from 'react-router-dom';
 // import { listSubheaderClasses } from '@mui/material';
@@ -108,7 +108,8 @@ const meddata = [
   { Label:'Medicine' ,  icon:<LocalHospitalIcon/> , to:"/Medicine"},
   { Label:'Doctor' , icon:<VaccinesIcon /> , to:"/Doctor"},
   { Label:'User' , icon:<GroupAddIcon /> , to:"/User"},
-  { Label:'Coustomer' , icon:<GroupAddIcon /> , to:"/Coustomer"}
+  { Label:'Coustomer' , icon:<GroupAddIcon /> , to:"/Coustomer"},
+  { Label:'Counter' , icon:<GroupAddIcon /> , to:"/Counter"}
 
 
 ]
