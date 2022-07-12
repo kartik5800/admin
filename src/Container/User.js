@@ -15,7 +15,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSelector, useDispatch } from 'react-redux';
-import { userdata, postuser } from '../redux/action/user.action';
+import { userdata, postuser, deleteuser , updateuser } from '../redux/action/user.action';
 
 
 
@@ -24,21 +24,24 @@ export default function User() {
   const [open, setOpen] = React.useState(false);
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState()
+// const [did, setDid] = useState();
   const [filterdata, setfilterdata] = useState([]);
   const User = useSelector(state => state.User)
   console.log(User);
   // console.log('delete',user.me)
 
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem('User'));
-    let filterData = localData.filter((d, i) => d.id !== id);
-    localStorage.setItem("User", JSON.stringify(filterData))
+    // let localData = JSON.parse(localStorage.getItem('User'));
+    // let filterData = localData.filter((d, i) => d.id !== id);
+    // localStorage.setItem("User", JSON.stringify(filterData))
+    dispatch(deleteuser(id))
     loadData()
 
   }
 
   const handleClickOpen = () => {
     setOpen(true);
+   
   };
 
   const handleClose = () => {
@@ -46,17 +49,16 @@ export default function User() {
   };
 
 
-  // let Doctor = {
-
-  //   name: yup.string().required('enter name'),
-  //   designation: yup.string().required('please enter designation'),
-  //   salary: yup.string().required('please enter salary'),
-
-
-  // }
+  let user = {
+    name: yup.string().required('enter name'),
+    designation: yup.string().required('please enter designation'),
+    salary: yup.string().required('please enter salary')
 
 
-  let schema = yup.object().shape(User);
+  }
+
+
+  let schema = yup.object().shape(user);
 
   const formik = useFormik({
     initialValues: {
@@ -76,21 +78,22 @@ export default function User() {
   });
 
   const handleUpdateData = (value) => {
-    let localData = JSON.parse(localStorage.getItem("User"));
-    let uData = localData.map((l, i) => {
-      if (l.id === value.id) {
-        return value
-      } else {
-        return l;
-      }
-    })
+    // let localData = JSON.parse(localStorage.getItem("User"));
+    // let uData = localData.map((l, i) => {
+    //   if (l.id === value.id) {
+    //     return value
+    //   } else {
+    //     return l;
+    //   }
+    // })
 
-    localStorage.setItem("User", JSON.stringify(uData));
+    // localStorage.setItem("User", JSON.stringify(uData));
+    dispatch(updateuser(value)) 
 
     setOpen(false);
     setUpdate();
     loadData();
-    console.log(uData);
+    // console.log(uData);
 
   }
 
@@ -110,7 +113,7 @@ export default function User() {
     //   localdata.push(data)
     //   localStorage.setItem("User", JSON.stringify(localdata))
     // }
-    dispatch(postuser(value));
+    dispatch(postuser(data));
     setOpen(false);
     loadData()
 
@@ -137,11 +140,12 @@ export default function User() {
   ];
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("User"))
+    // let localData = JSON.parse(localStorage.getItem("User"))
 
-    if (localData !== null) {
-      setData(localData)
-    }
+    // if (localData !== null) {
+    //   setData(localData)
+    // }
+    setData(User.User)
   }
   const dispatch = useDispatch();
   useEffect(

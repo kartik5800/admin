@@ -1,39 +1,60 @@
 {
   "User": [
     {
-      "id": 1,
-      "name": "json-",
-      "designation": "typicode",
-      "salary": "15000"
+      "id": 69,
+      "name": "kartik ",
+      "designation": "mbbs",
+      "salary": "500000"
     },
     {
-      "id": 2,
-      "name": "json-server",
-      "designation": "typicode",
-      "salary": "15000"
+      "id": 582,
+      "name": "xyz",
+      "designation": "md",
+      "salary": "20000"
     },
     {
-      "id": 3,
-      "name": "-server",
-      "designation": "typicode",
-      "salary": "15000"
+      "id": 812,
+      "name": "pqr",
+      "designation": "ent",
+      "salary": "50000"
     },
     {
-      "id": 4
+      "id": 776,
+      "name": "123",
+      "designation": "123",
+      "salary": "123000"
+    },
+    {
+      "id": 919,
+      "name": "krunal",
+      "designation": "bca",
+      "salary": "20050"
     }
   ],
-  "comments": [
+  "medicines": [
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": 195,
+      "name": "dsd112",
+      "price": "1112",
+      "quantity": "222",
+      "expiry": "11112"
+    },
+    {
+      "id": 808,
+      "name": "aaa",
+      "price": "111",
+      "quantity": "111",
+      "expiry": "2022"
+    },
+    {
+      "id": 720,
+      "name": "bbb",
+      "price": "222",
+      "quantity": "222",
+      "expiry": "2025"
     }
   ],
   "profile": {
     "name": "typicode"
   }
 }
-
-
-
-
