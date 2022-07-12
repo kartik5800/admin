@@ -28,6 +28,7 @@ export default function Doctor() {
     localStorage.setItem("Doctor", JSON.stringify(filterData))
     loadData()
 
+    
   }
 //dialog box open krva mate
  const handleClickOpen = () => {

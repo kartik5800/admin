@@ -77,6 +77,7 @@ export default function Medicine() {
     }
   })
 
+  
   const handleupdate = (value) => {
     // let localdata = JSON.parse(localStorage.getItem("medicine"));
 

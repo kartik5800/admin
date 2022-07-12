@@ -130,3 +130,4 @@ export const loadingMedicine = () => (dispatch) => {
 export const errorMedicine = (e) => (dispatch) => {
   dispatch({ type: ActionTypes.ERROR_MEDICINE, payload: e })
 }
+

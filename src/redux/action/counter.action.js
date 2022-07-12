@@ -7,3 +7,4 @@ export const incrementCounter = () => (dispech) => {
 export const decrementCounter = () => (dispech) => {
     dispech({type:ActionTypes.DECREMENT_COUNTER});
 }
+
