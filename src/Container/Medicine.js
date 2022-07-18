@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
 import { deleteMedicine, editMedicine, Medicinedata, postMedicine } from '../redux/action/medicine.action';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { BarLoader } from 'react-spinners';
 
 
 export default function Medicine() {
@@ -24,11 +24,13 @@ export default function Medicine() {
   const [data, setData] = useState([]);
   const [Update, setUpdate] = useState();
   const [dopen, setDopen] = React.useState(false);
-  const [did, setDid] = useState();
+  const [did, setDid] = useState(); 
   const medicines = useSelector(state => state.medicine)
   console.log(medicines);
   // console.log('delete',medicines.medicine);
   
+
+
 
   const handleClickDopen = (id) => {
     setDopen(true);
@@ -77,7 +79,7 @@ export default function Medicine() {
     }
   })
 
-  
+
   const handleupdate = (value) => {
     // let localdata = JSON.parse(localStorage.getItem("medicine"));
 
@@ -190,6 +192,8 @@ export default function Medicine() {
     },
     [])
 
+
+
   return (
 
     <>
@@ -198,7 +202,9 @@ export default function Medicine() {
 
           {
             medicines.isLoading ?
-              <p>Loading....</p>
+       
+           <BarLoader/>
+      
               :
               (medicines.error !== '' ?
                 <p>{medicines.error}</p>

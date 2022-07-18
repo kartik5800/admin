@@ -15,14 +15,14 @@
     {
       "id": 812,
       "name": "pqr",
-      "designation": "ent",   
+      "designation": "ent",
       "salary": "50000"
     },
     {
       "id": 776,
       "name": "123",
       "designation": "123",
-      "salary": "123000" 
+      "salary": "123000"
     },
     {
       "id": 919,
@@ -33,18 +33,11 @@
   ],
   "medicines": [
     {
-      "id": 195,
-      "name": "dsd112",
-      "price": "1112",
-      "quantity": "222",
-      "expiry": "11112"
-    },
-    {
       "id": 808,
-      "name": "aaa",
-      "price": "111",
-      "quantity": "111",
-      "expiry": "2022"
+      "name": "aaabc",
+      "price": "b",
+      "quantity": "b",
+      "expiry": "b"
     },
     {
       "id": 720,
@@ -54,6 +47,16 @@
       "expiry": "2025"
     }
   ],
+
+  "doctor": [
+    {
+      "id": 720,
+      "name": "bbb",
+      "price": "222",
+      "quantity": "222"
+    }
+  ],
+
   "profile": {
     "name": "typicode"
   }

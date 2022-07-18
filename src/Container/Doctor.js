@@ -14,6 +14,10 @@ import { Form, Formik, useFormik } from 'formik';
 import { DataGrid } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { getdoctor } from '../redux/action/medicine.action';
+import { useDispatch, useSelector } from 'react-redux';
+import { doctordata, postdoctor,deletedoctor } from '../redux/action/doctors.action';
+
 
 
 
@@ -22,25 +26,30 @@ export default function Doctor() {
   const [data, setData] = useState([])
   const [Update, setUpdate] = useState()
 
+  const doctor = useSelector(state => state.doctor)
+
+
+  // delete krva mate
   const handleDelete = (id) => {
-    let localData = JSON.parse(localStorage.getItem('Doctor'));
-    let filterData = localData.filter((d, i) => d.id !== id);
-    localStorage.setItem("Doctor", JSON.stringify(filterData))
+    // let localData = JSON.parse(localStorage.getItem('Doctor'));
+    // let filterData = localData.filter((d, i) => d.id !== id);
+    // localStorage.setItem("Doctor", JSON.stringify(filterData))
+    dispatch(deletedoctor(id))
     loadData()
 
-    
+
   }
-//dialog box open krva mate
- const handleClickOpen = () => {
+  //dialog box open krva mate
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
   // dialog box close krva mate
-const handleClose = () => {
+  const handleClose = () => {
     setOpen(false);
   };
 
-// validation mate 
+  // validation mate 
   let Doctor = {
     name: yup.string().required('enter name'),
     designation: yup.string().required('please enter designation'),
@@ -57,6 +66,7 @@ const handleClose = () => {
       designation: '',
       salary: '',
     },
+
     validationSchema: schema,
     onSubmit: (value, { resetForm }) => {
       if (Update) {
@@ -89,24 +99,24 @@ const handleClose = () => {
   }
 
 
-// data submit krva mate
+  // data submit krva mate
   const handleSubmitdata = (value) => {
-    let localdata = JSON.parse(localStorage.getItem("Doctor"))
+    // let localdata = JSON.parse(localStorage.getItem("Doctor"))
 
 
-// rendom id lavva mate
+    // rendom id lavva mate
     let data = {
       id: Math.floor(Math.random() * 1000),
       ...value
     }
 
-    if (localdata === null) {
-      localStorage.setItem("Doctor", JSON.stringify([data]))
-    } else {
-      localdata.push(data)
-      localStorage.setItem("Doctor", JSON.stringify(localdata))
-    }
-
+    // if (localdata === null) {
+    //   localStorage.setItem("Doctor", JSON.stringify([data]))
+    // } else {
+    //   localdata.push(data)
+    //   localStorage.setItem("Doctor", JSON.stringify(localdata))
+    // }
+    dispatch(postdoctor(data));
     setOpen(false);
     loadData()
 
@@ -133,15 +143,20 @@ const handleClose = () => {
   ];
 
   const loadData = () => {
-    let localData = JSON.parse(localStorage.getItem("Doctor"))
+    // let localData = JSON.parse(localStorage.getItem("Doctor"))
 
-    if (localData !== null) {
-      setData(localData)
-    }
+    // if (localData !== null) {
+    //   setData(localData)
+    // }
+
+    setData(doctor.doctor)
   }
+  const dispatch = useDispatch();
+
 
   useEffect(
     () => {
+      dispatch(doctordata())
       loadData()
     },
     [])
@@ -158,79 +173,88 @@ const handleClose = () => {
 
     <Box>
       <Container>
-        <div>
-          <Button variant="outlined" onClick={handleClickOpen}>
-            Add Doctor
-          </Button>
-          <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
-              rows={data}
-              columns={columns1}
-              pageSize={5}
-              rowsPerPageOptions={[5]}
-              checkboxSelection
-            />
-          </div>
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Add Doctor</DialogTitle>
-            <Formik value={formik}>
-              <Form onSubmit={formik.handleSubmit}>
-                <DialogContent>
-
-                  <TextField
-                    margin="dense"
-                    id="name"
-                    label="name"
-                    type="name"
-                    fullWidth
-                    variant="standard"
-                    onChange={formik.handleChange}
-                    defaultValue={formik.values.name}
-                    helperText={formik.errors.name}
-                    error={formik.errors.name ? true : false}
+        {
+          doctor.isLoading ?
+            <p>Loading....</p>
+            :
+            (doctor.error !== '' ?
+              <p>{doctor.error}</p>
+              :
+              <div>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                  Add Doctor
+                </Button>
+                <div style={{ height: 400, width: '100%' }}>
+                  <DataGrid
+                    rows={data}
+                    columns={columns1}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
                   />
-                  <TextField
-                    margin="dense"
-                    id="designation"
-                    label="designation"
-                    type="designation"
-                    fullWidth
-                    variant="standard"
-                    onChange={formik.handleChange}
-                    defaultValue={formik.values.designation}
-                    helperText={formik.errors.designation}
-                    error={formik.errors.designation ? true : false}
-                  />
-                  <TextField
-                    margin="dense"
-                    id="salary"
-                    label="salary"
-                    fullWidth
-                    variant="standard"
-                    onChange={formik.handleChange}
-                    defaultValue={formik.values.salary}
-                    helperText={formik.errors.salary}
-                    error={formik.errors.salary ? true : false}
+                </div>
+                <Dialog open={open} onClose={handleClose}>
+                  <DialogTitle>Add Doctor</DialogTitle>
+                  <Formik value={formik}>
+                    <Form onSubmit={formik.handleSubmit}>
+                      <DialogContent>
 
-                  />
+                        <TextField
+                          margin="dense"
+                          id="name"
+                          label="name"
+                          type="name"
+                          fullWidth
+                          variant="standard"
+                          onChange={formik.handleChange}
+                          defaultValue={formik.values.name}
+                          helperText={formik.errors.name}
+                          error={formik.errors.name ? true : false}
+                        />
+                        <TextField
+                          margin="dense"
+                          id="designation"
+                          label="designation"
+                          type="designation"
+                          fullWidth
+                          variant="standard"
+                          onChange={formik.handleChange}
+                          defaultValue={formik.values.designation}
+                          helperText={formik.errors.designation}
+                          error={formik.errors.designation ? true : false}
+                        />
+                        <TextField
+                          margin="dense"
+                          id="salary"
+                          label="salary"
+                          fullWidth
+                          variant="standard"
+                          onChange={formik.handleChange}
+                          defaultValue={formik.values.salary}
+                          helperText={formik.errors.salary}
+                          error={formik.errors.salary ? true : false}
 
-                  <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    {
-                      Update ?
-                        <Button type="submit">Update</Button>
-                        :
-                        <Button type="submit">Submit</Button>
+                        />
 
-                    }
+                        <DialogActions>
+                          <Button onClick={handleClose}>Cancel</Button>
+                          {
+                            Update ?
+                              <Button type="submit">Update</Button>
+                              :
+                              <Button type="submit">Submit</Button>
+
+                          }
 
 
-                  </DialogActions>
-                </DialogContent>
-              </Form>
-            </Formik>
-          </Dialog>
-        </div>
+                        </DialogActions>
+                      </DialogContent>
+                    </Form>
+                  </Formik>
+                </Dialog>
+              </div>
+            )
+        }
       </Container>
     </Box>
 

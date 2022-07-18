@@ -1,26 +1,48 @@
-import { BASE_URL } from "../../baseUrl";
+// import { BASE_URL } from "../../baseUrl";
+import { getdoctordata, postdoctordata , deletedoctordata} from "../../Comman/api/Doctor.api";
 import * as ActionTypes from "../ActionType"
 
-export const Doctorsdata = () => (dispatch) => {
-    try{
-        fetch(BASE_URL + 'doctors')
-        .then(response => {
-            if (response.ok) {
-              return response;
-            } else {
-              var error = new Error('Error ' + response.status + ': ' + response.statusText);
-              error.response = response;
-              throw error;
-            }
-          },
-            error => {
-              var errmess = new Error(error.message);
-              throw errmess;
-            })
-          .then(response => response.json())
-          .then(Doctors => dispatch({ type: ActionTypes.GET_DOCTORS, payload: Doctors }))
-        }catch (error) {
-            console.log(error);
-        }   
+export const doctordata = () => (dispatch) => {
+  try {
+    // dispatch(loadingdoctor())
+
+   getdoctordata()
+    .then((data)=> dispatch({ type: ActionTypes.GET_DOCTOR, payload: data.data }))
+    .catch(error => dispatch((error.message)))
+
+
+
+  } catch (error) {
+   
+  }
 }
 
+
+export const postdoctor = (data) => (dispatch) => {
+  try {
+
+    // dispatch(loadingMedicine())
+   
+    postdoctordata(data)
+    .then((data)=> dispatch({ type: ActionTypes.POST_DOCTOR, payload: data.data }))
+    .catch(error => dispatch((error.message)));
+   
+ 
+  } catch (error) {
+    
+  }
+}
+
+
+export const deletedoctor = (id) => (dispatch) => {
+  try {
+
+    deletedoctordata(id)
+    .then(dispatch({ type: ActionTypes.DELETE_DOCTOR, payload: id }))
+    // .catch(error => dispatch(errorMedicine(error.message)))
+
+    
+  } catch (error) {
+    // dispatch(errorMedicine(error))
+  }
+}
