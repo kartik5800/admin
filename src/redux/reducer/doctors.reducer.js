@@ -28,7 +28,21 @@ export const doctorReducer = (state = initalState, action) => {
                 return {
                     ...state,
                     isLoading: false,
-                    medicine: state.doctor.filter((l) => l.id !== action.payload),
+                    doctor: state.doctor.filter((l) => l.id !== action.payload),
+                    error: ''
+                }
+
+                case ActionTypes.UPDATE_DOCTOR:
+                return {
+                    ...state,
+                    isLoading: false,
+                    doctor: state.doctor.map((l) => {
+                        if (l.id === action.payload.id) {
+                            return action.payload
+                        }else{
+                            return l
+                        }
+                    }),
                     error: ''
                 }
         default:

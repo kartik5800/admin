@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 })
 
 export const axiosrequest = (config) => {
-    return axiosrequest.request(config)
+    return axiosInstance.request(config)
 }
 
 export const getrequest = (path) => {
@@ -28,9 +28,19 @@ export const postrequest = (path,data) => {
     })
 }
 
-export const deleteReuest = (path, id) => {
+export const deletereuest = (path, id) => {
     return axiosrequest({
         url: path + id,
-        method: 'DELETE',       
+        method: 'DELETE', 
+        headers: {
+            'Content-Type': 'application/json',
+        }      
+    })
+}
+
+export const putrequest = (path, data) => {
+    return axiosrequest({
+        url: path + data,
+        method: 'PUT',       
     })
 }

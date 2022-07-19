@@ -16,7 +16,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { getdoctor } from '../redux/action/medicine.action';
 import { useDispatch, useSelector } from 'react-redux';
-import { doctordata, postdoctor,deletedoctor } from '../redux/action/doctors.action';
+import { doctordata, postdoctor,deletedoctor, updatedoctor } from '../redux/action/doctors.action';
+import { putrequest } from '../Comman/request';
 
 
 
@@ -80,21 +81,20 @@ export default function Doctor() {
 
   // data update mate and dialog box close krva and new data set krva mate 
   const handleUpdateData = (value) => {
-    let localData = JSON.parse(localStorage.getItem("Doctor"));
-    let uData = localData.map((l, i) => {
-      if (l.id === value.id) {
-        return value
-      } else {
-        return l;
-      }
-    })
+    // let localData = JSON.parse(localStorage.getItem("Doctor"));
+    // let uData = localData.map((l, i) => {
+    //   if (l.id === value.id) {
+    //     return value
+    //   } else {
+    //     return l;
+    //   }
+    // })
 
-    localStorage.setItem("Doctor", JSON.stringify(uData));
-
+    // localStorage.setItem("Doctor", JSON.stringify(uData));
+    dispatch(updatedoctor(value))
     setOpen(false);
     setUpdate();
     loadData();
-    console.log(uData);
 
   }
 
@@ -186,7 +186,7 @@ export default function Doctor() {
                 </Button>
                 <div style={{ height: 400, width: '100%' }}>
                   <DataGrid
-                    rows={data}
+                    rows={doctor.doctor}
                     columns={columns1}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

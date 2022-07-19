@@ -1,4 +1,4 @@
-import { getrequest , postrequest ,deleteReuest} from "../request"
+import { getrequest , postrequest , deletereuest, putrequest} from "../request"
 
 
 export const getdoctordata =(data)  => {
@@ -11,5 +11,9 @@ export const postdoctordata =(data)  => {
 
 
 export const deletedoctordata = (id) => {
-    return deleteReuest('medicines/', id)
+    return deletereuest('doctor/', id)
+}
+
+export const updatedoctordata = (data) =>  {
+    return putrequest ("doctor/" , data.id)
 }

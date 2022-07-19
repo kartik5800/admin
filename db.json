@@ -29,6 +29,12 @@
       "name": "krunal",
       "designation": "bca",
       "salary": "20050"
+    },
+    {
+      "id": 728,
+      "name": "ghhgh",
+      "designation": "gdhgdh",
+      "salary": "gdhgdhgdh"
     }
   ],
   "medicines": [
@@ -45,18 +51,23 @@
       "price": "222",
       "quantity": "222",
       "expiry": "2025"
+    },
+    {
+      "id": 170,
+      "name": "aaa",
+      "price": "aaa",
+      "quantity": "aaaa",
+      "expiry": "aaa111"
     }
   ],
-
   "doctor": [
     {
-      "id": 720,
-      "name": "bbb",
-      "price": "222",
-      "quantity": "222"
+      "id": 913
+    },
+    {
+      "id": 629
     }
   ],
-
   "profile": {
     "name": "typicode"
   }
