@@ -11,6 +11,8 @@ import Coustomer from "./Container/Coustomer/Coustomer";
 import { Provider } from "react-redux"
 import { configureStore } from "./redux/Store";
 import Counter from "./Container/Counter/Counter"
+import PromicesExample from "./Container/Coustomer/PromicesExample";
+import UsememosExaple from "./Container/Coustomer/UsememosExaple";
 
 
 function App() {
@@ -25,6 +27,9 @@ function App() {
             <Route path={'/User'} exact component={User} />
             <Route path={'/Coustomer'} exact component={Coustomer} />
             <Route path={'/Counter'} exact component={Counter} />
+            <Route path={'/PromicesExample'} exact component={PromicesExample} />
+            <Route path={'/UsememosExaple'} exact component={UsememosExaple} />
+            
             {/* <Counter /> */}
           </Switch>
         </Layout>

@@ -110,7 +110,9 @@ const meddata = [
   { Label:'Doctor' , icon:<VaccinesIcon /> , to:"/Doctor"},
   { Label:'User' , icon:<GroupAddIcon /> , to:"/User"},
   { Label:'Coustomer' , icon:<GroupAddIcon /> , to:"/Coustomer"},
-  { Label:'Counter' , icon:<GroupAddIcon /> , to:"/Counter"}
+  { Label:'Counter' , icon:<GroupAddIcon /> , to:"/Counter"},
+  { Label:'PromicesExample' , icon:<GroupAddIcon /> , to:"/PromicesExample"},
+  { Label:'UsememosExaple' ,  icon:<LocalHospitalIcon/> , to:"/UsememosExaple"},
 
 
 ]
