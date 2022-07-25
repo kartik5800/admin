@@ -1,5 +1,5 @@
 // import MiniDrawer from "./Component/Layout/Layout";
-import React from "react";
+import React, { useCallback } from "react";
 import { Switch } from "react-router-dom";
 // import reactRouterDom from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -13,7 +13,7 @@ import { configureStore } from "./redux/Store";
 import Counter from "./Container/Counter/Counter"
 import PromicesExample from "./Container/Coustomer/PromicesExample";
 import UsememosExaple from "./Container/Coustomer/UsememosExaple";
-
+import Usecallbackexp from "./Container/Coustomer/Usecallbackexp";
 
 function App() {
   const store = configureStore()
@@ -29,6 +29,7 @@ function App() {
             <Route path={'/Counter'} exact component={Counter} />
             <Route path={'/PromicesExample'} exact component={PromicesExample} />
             <Route path={'/UsememosExaple'} exact component={UsememosExaple} />
+            <Route path={'/Usecallbackexp'} exact component={Usecallbackexp} />
             
             {/* <Counter /> */}
           </Switch>
